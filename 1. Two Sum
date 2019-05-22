@@ -20,3 +20,80 @@ class Solution {
 }
 执行用时 : 57 ms, 在Two Sum的Java提交中击败了26.28% 的用户
 内存消耗 : 38.2 MB, 在Two Sum的Java提交中击败了71.86% 的用户
+2.优化空间复杂度，返回匿名数组
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+
+        for(int i=0;i<nums.length-1;i++)
+        {
+            for(int t=i+1;t<nums.length;t++)
+            {
+                if((nums[i]+nums[t])==target)
+                {
+                    
+                    return new int[] {i,t};
+                }
+            }
+        }
+        
+        throw new IllegalArgumentException("No two sum solution");
+    }
+}
+执行用时 : 54 ms, 在Two Sum的Java提交中击败了33.71% 的用户
+内存消耗 : 36.9 MB, 在Two Sum的Java提交中击败了93.42% 的用户
+3.优化时间复杂度，采用hashmap
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+
+        Map<Integer,Integer> a=new HashMap<>();
+       
+        for(int i=0;i<nums.length;i++)
+        {
+            int temp=target-nums[i];
+            if(a.containsKey(temp))
+            {
+                return new int[] {a.get(temp),i};
+            }
+            a.put(nums[i],i);//这里非常精妙了，加在if之后可以避免[3,3,3,3]这种情况取到相同的key
+        }
+        return nums;
+    }
+}
+hashmap的常用方法总结一下，网上总结的都不太好
+执行用时 : 5 ms, 在Two Sum的Java提交中击败了96.85% 的用户
+内存消耗 : 35.5 MB, 在Two Sum的Java提交中击败了98.89% 的用户
+4.综合一下：以6为尺度分割，结果反而不如意
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+
+        Map<Integer,Integer> a=new HashMap<>();
+       int nl=nums.length;
+        if(nl<6)
+        {
+            for(int i=0;i<nl-1;i++)
+          {
+            for(int t=i+1;t<nl;t++)
+            {
+                if((nums[i]+nums[t])==target)
+                {
+                    
+                    return new int[] {i,t};
+                }
+            }
+        }
+        }else{
+        for(int i=0;i<nl;i++)
+        {
+            int temp=target-nums[i];
+            if(a.containsKey(temp))
+            {
+                return new int[] {a.get(temp),i};
+            }
+            a.put(nums[i],i);
+        }
+        }
+        return nums;
+    }
+}
+执行用时 : 8 ms, 在Two Sum的Java提交中击败了85.99% 的用户
+内存消耗 : 38.9 MB, 在Two Sum的Java提交中击败了52.01% 的用户
