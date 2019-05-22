@@ -1,0 +1,22 @@
+1.
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] out=new int[2];
+        for(int i=0;i<nums.length-1;i++)
+        {
+            for(int t=i+1;t<nums.length;t++)
+            {
+                if((nums[i]+nums[t])==target)
+                {
+                    out[0]=i;
+                    out[1]=t;
+                    return out;
+                }
+            }
+        }
+        
+        return nums;
+    }
+}
+执行用时 : 57 ms, 在Two Sum的Java提交中击败了26.28% 的用户
+内存消耗 : 38.2 MB, 在Two Sum的Java提交中击败了71.86% 的用户
