@@ -1,0 +1,28 @@
+1.这题有点难，这样暴力很容易想到，但是不能去除重复的值
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        int nl=nums.length;
+        List<Integer> l=new ArrayList<>();
+        List<List<Integer>> result=new ArrayList<>();
+        for(int i=0;i<nl;i++)
+        {
+            for(int t=i;t<nl;t++)
+            {
+                for(int y=t;y<nl;y++)
+                {
+                    if((nums[i]+nums[t]+nums[y])==0)
+                    {
+                        l.add(nums[i]);
+                        l.add(nums[t]);
+                        l.add(nums[y]);
+                        result.add(l);
+                        System.out.println(result);
+                        l=new ArrayList<>();
+                    }
+                }
+            }
+            
+        }
+        return result;
+    }
+}
